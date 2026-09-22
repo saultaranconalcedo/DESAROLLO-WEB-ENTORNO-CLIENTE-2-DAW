@@ -1,26 +1,30 @@
-<Doctype html>
-<html>
-    <head>
-        <title>ALBOR LOGISTICS</title>
-    </head>
+<!DOCTYPE html>
+
+<head>
+    <title>ALBOR LOGISTICS</title>
+
+</head>
 
 <body>
 
-<center><h1>Calculadora de costes de viaje</h1></center>
+<center><h1>CALCULADORA DE VIAJES</h1></center>
 
-<p><b>distancia:</b> <span id="distancia"></span> km</p>
-<p><b>consumo del camión:</b> <span id="consumo"></span> L/100km</p>
-<p><b>precio del combustible:</b> <span id="precio_combustible"></span> €/L</p>
-<p><b>coste de peajes:</b> <span id="coste_peajes"></span> €</p>
+    <p>Distancia: <input type="number" id="distancia"> km</p>
+    <p>Consumo: <input type="number" id="consumo"> L/100 km</p>
+    <p>Combustible: <input type="number" id="precio_combustible"> €/L</p>
+    <p>Peajes: <input type="number" id="coste_peajes"> €</p>
 
-<p><b>combustible necesario:</b> <span id="litros"></span> L</p>
-<p><b>coste combustible:</b> <span id="coste_combustible"></span> €</p>
-<p><b>coste total:</b> <span id="coste_total"></span> €</p>
+    <button onclick="calcular()">Calcular</button>
 
-<script src="js/calculadora.js"></script>
+    <p id="mensaje_error" style="color: red;"></p>
 
+    <p>Combustible necesario: <span id="litros"></span> L</p>
+    <p>Coste combustible: <span id="coste_combustible"></span> €</p>
+    <p>Coste total: <span id="coste_total"></span> €</p>
 
+    <script src="js/calculadora.js"></script>
 
 </body>
+
 
 </html>
