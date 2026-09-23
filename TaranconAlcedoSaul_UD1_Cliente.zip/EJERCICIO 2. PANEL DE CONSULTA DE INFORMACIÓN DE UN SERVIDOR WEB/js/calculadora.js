@@ -5,7 +5,7 @@ let consumo = Number(document.getElementById("consumo").value);
 let precio_combustible = Number(document.getElementById("precio_combustible").value);
 let coste_peajes = Number(document.getElementById("coste_peajes").value);
 
-    if (distancia <= 0 || consumo <= 0 || precio_combustible <= 0 || coste_peajes < 0) {
+    if (distancia <= 0 || consumo <= 0 || precio_combustible <= 0 || coste_peajes <= 0) {
         document.getElementById("mensaje_error").innerHTML = "Los datos tienen que ser mayores que 0";
         return; 
     }
