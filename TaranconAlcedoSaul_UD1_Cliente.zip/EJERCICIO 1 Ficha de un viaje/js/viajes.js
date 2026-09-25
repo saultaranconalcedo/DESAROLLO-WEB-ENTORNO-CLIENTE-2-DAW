@@ -1,10 +1,9 @@
-
-let numeroViaje =  125;
-let origen = "Madrid";
-let destino = "Sevilla";
-let camion = "1234-ABC";
-let conductor = "Juan García";
-let distancia = 530;
+let numeroViaje = 100;
+let origen = "Cadiz";
+let destino = "Malaga";
+let camion = "4253-CBD";
+let conductor = "Saul Tarancon";
+let distancia = 220;
 let estado = "En curso";
 
 document.getElementById("origen").innerHTML = origen;
