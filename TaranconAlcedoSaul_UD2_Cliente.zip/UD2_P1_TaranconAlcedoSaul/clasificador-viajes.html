@@ -2,7 +2,9 @@
 <html>
 
 <head>
+
     <title>Clasificador de Viajes de ALBOR LOGISTICS</title>
+
 </head>
 
 <body>
@@ -14,35 +16,25 @@
 <div>
 
 <p><b>Código del viaje</b></p>
-<input type = "text" id = "destino">
+<input type = "text" id = "codigo">
 
 <p><b>Matrícula del camión</b></p>
 <input type = "text" id = "matricula">
 
-<p></p><b>Ciudad de origen</b></p>
+<p><b>Ciudad de origen</b></p>
 <input type = "text" id = "origen">
 
 <p><b>Ciudad de destino</b></p>
 <input type = "text" id = "destino">
 
 <p><b>Estado del viaje</b></p>
-<input type = "text" id = "estado" placeholder = "ej: pendiente, asignado, en_ruta.."> <!--- el placeholder es un texto de ayuda para el usuario que cuando empieze a escribir desaparece-->
+<input type = "text" id = "estado" placeholder = "ej: pendiente, asignado, en_ruta.."> <!-- el placeholder es un texto de ayuda que cuando empieze a escribir desaparece-->
 
 <button onclick="clasificarViaje()">Clasificar Viaje</button>
-
-       
+    
 <p id="resultado"></p> <!-- Para mostrar el resultado con JS -->
 
 </div>
-
-<br><br>
-
-switch case{
-
-}
-
-
-
 <script src="js/app.js"></script>
 </body>
 
