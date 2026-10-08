@@ -29,7 +29,7 @@ viajeactual ++;
 }
 mensaje += "<h3>Todos los viajes han sido procesados.</h3>";
 
-mensaje += "<center><h2>Resumen del Proceso:</h2></center>";
+mensaje += "<center><h2>Resumen:</h2></center>";
 mensaje += "<p><b>Viajes procesados:</b> " + viajesprocesados + "</p>";
 mensaje += "<p><b>Viajes correctos:</b> " + viajescorrectos + "</p>";
 mensaje += "<p><b>Viajes con incidencia:</b> " + viajesincidencia + "</p>";
