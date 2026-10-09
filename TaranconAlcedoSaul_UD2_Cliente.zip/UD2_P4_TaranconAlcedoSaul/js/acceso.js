@@ -1,23 +1,24 @@
 let intentos = 0;             
-const MAX_INTENTOS = 3;       
-let esValido = false;         
+const intentos_max = 3;  //se usa coonst porque este valoe no cambia     
+let esValido = false;   //empieza en false porque el usuario no empieza identificado       
 let codigoIngresado = "";    
 
 // Se ejecuta obligatoriamente al menos una vez y solicita el código repetidamenten hasta que el usuario introduzca un código válido O alcance el máximo de 3 intentos.
 do {
     intentos++; //Suma 1 al contador de intentos cada vez que se ejecute
 
-    // Solicitamos el código mediante la ventana emergente prompt()
-    codigoIngresado = prompt("Intento " + intentos + " de " + MAX_INTENTOS + ":\nIntroduce tu codigo de empleado");
+    // Solicitamos el codigo al usuario mediante prompt que muestra una ventana emergent
+    codigoIngresado = prompt("Intento " + intentos + " de " + intentos_max + ":\nIntroduce tu codigo de empleado");
 
     //Comprobamos si el código coincide con alguno de los tres
     if (codigoIngresado === "ALBOR001" || codigoIngresado === "ALBOR002" || codigoIngresado === "ALBOR003") {
-        esValido = true; // El código es correcto, marcamos como válido para salir del bucle
+        esValido = true; // El código es correcto salimos del bucle
     } else {
-        alert("Codigo incorrecto. Te quedan " + (MAX_INTENTOS - intentos) + " intentos.");
+        //alert es como el prompt, muestra un aviso emergente.
+        alert("No valido. " + (intentos_max - intentos) + " intentos disponibles.");
     }
 
-} while (!esValido && intentos < MAX_INTENTOS);
+} while (!esValido && intentos < intentos_max);
 
 
 let mensaje = "";
@@ -41,7 +42,6 @@ if (esValido) {
     }
 
     mensaje += "<h2>ACCESO AUTORIZADO</h2>";
-    mensaje += "<p><b>Bienvenido al panel de operaciones.</b></p>";
     mensaje += "<hr>";
     mensaje += "<p><b>Empleado:</b> " + codigoIngresado + "</p>";
     mensaje += "<p><b>Perfil:</b> " + perfil + "</p>";
@@ -50,8 +50,7 @@ if (esValido) {
 } else {
     // Mensaje de bloqueo si pierdes los 3 intentos
     mensaje += "<h2>ACCESO BLOQUEADO</h2>";
-    mensaje += "<p><b>Se ha superado el numero maximo de intentos.</b></p>";
-    mensaje += "<p><b>Intentos utilizados:</b> " + intentos + "</p>";
+    mensaje += "<p>Se ha superado el numero maximo de intentos.</p>";
 }
 
 let contenedor = document.getElementById("contenedor-acceso");
