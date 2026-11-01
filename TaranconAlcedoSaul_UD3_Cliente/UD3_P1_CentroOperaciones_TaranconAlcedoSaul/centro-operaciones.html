@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Operaciones - ALBOR LOGISTICS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f6f9;
+        }
+        h1, h2 {
+            color: #1e3a8a;
+        }
+        .panel, .info-box {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 8px;
+            margin-right: 5px;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ALBOR LOGISTICS - Centro de Operaciones</h1>
+
+    <!-- Botones de la botonera principal -->
+    <div class="panel">
+        <h2>Panel de Control</h2>
+        <button id="btnAbrirPanel">Abrir panel de operaciones</button>
+        <button id="btnAbrirSeguimiento">Abrir seguimiento de viajes</button>
+        <button id="btnWebCorporativa">Abrir web corporativa</button>
+        <button id="btnRecargar">Recargar página</button>
+        <button id="btnVolver">Volver a la página anterior</button>
+    </div>
+
+    <!-- Caja para escribir la web que mandaremos a la otra ventana -->
+    <div class="panel">
+        <h2>Cargar URL externa en ventana secundaria</h2>
+        <input type="text" id="inputUrl" placeholder="https://ejemplo.com">
+        <button id="btnCargarUrl">Cargar URL</button>
+        <div id="mensajeError" class="error"></div>
+    </div>
+
+    <!-- Datos del sistema que rellenaremos con JS -->
+    <div class="info-box">
+        <h2>Información del Sistema</h2>
+        <p><strong>URL actual:</strong> <span id="infoUrl"></span></p>
+        <p><strong>Protocolo:</strong> <span id="infoProtocolo"></span></p>
+        <p><strong>Navegador / Plataforma:</strong> <span id="infoNavegador"></span></p>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

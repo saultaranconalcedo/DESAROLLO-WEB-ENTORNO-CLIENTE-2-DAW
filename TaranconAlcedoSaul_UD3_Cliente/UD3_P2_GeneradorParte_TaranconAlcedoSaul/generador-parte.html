@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Parte de Viaje - ALBOR LOGISTICS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f6f9;
+        }
+        h1, h2 {
+            color: #1e3a8a;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        form, .parte-box {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 300px;
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .parte-card {
+            border: 2px solid #1e3a8a;
+            padding: 15px;
+            border-radius: 6px;
+            background-color: #fafafa;
+        }
+        .parte-header {
+            text-align: center;
+            border-bottom: 2px solid #1e3a8a;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ALBOR LOGISTICS - Generador de Parte de Viaje</h1>
+
+    <div class="container">
+        <!-- Formulario para meter los datos del viaje -->
+        <form id="formParte">
+            <h2>Datos del Viaje</h2>
+            
+            <div class="form-group">
+                <label for="codigo">Código del viaje:</label>
+                <input type="text" id="codigo" placeholder="Ej: VIA-001">
+            </div>
+
+            <div class="form-group">
+                <label for="matricula">Matrícula:</label>
+                <input type="text" id="matricula" placeholder="Ej: 1234ABC">
+            </div>
+
+            <div class="form-group">
+                <label for="conductor">Conductor:</label>
+                <input type="text" id="conductor" placeholder="Ej: Juan García">
+            </div>
+
+            <div class="form-group">
+                <label for="origen">Origen:</label>
+                <input type="text" id="origen" placeholder="Ej: Jerez">
+            </div>
+
+            <div class="form-group">
+                <label for="destino">Destino:</label>
+                <input type="text" id="destino" placeholder="Ej: Madrid">
+            </div>
+
+            <div class="form-group">
+                <label for="distancia">Distancia (km):</label>
+                <input type="number" id="distancia" placeholder="Ej: 640">
+            </div>
+
+            <div class="form-group">
+                <label for="estado">Estado del viaje:</label>
+                <select id="estado">
+                    <option value="">-- Seleccionar --</option>
+                    <option value="PENDIENTE">PENDIENTE</option>
+                    <option value="EN RUTA">EN RUTA</option>
+                    <option value="FINALIZADO">FINALIZADO</option>
+                    <option value="CANCELADO">CANCELADO</option>
+                </select>
+            </div>
+
+            <button type="button" id="btnGenerar">Generar parte</button>
+            <div id="mensajeError" class="error"></div>
+        </form>
+
+        <!-- Aquí imprimiremos el parte con JS -->
+        <div class="parte-box">
+            <h2>Parte Generado</h2>
+            <div id="contenedorParte">
+                <p>Completa el formulario y pulsa "Generar parte" para ver el resultado aquí.</p>
+            </div>
+            <button type="button" id="btnNuevaVentana" style="display: none;">Abrir parte en nueva ventana</button>
+        </div>
+    </div>
+
+    <script src="js/parte.js"></script>
+</body>
+</html>
