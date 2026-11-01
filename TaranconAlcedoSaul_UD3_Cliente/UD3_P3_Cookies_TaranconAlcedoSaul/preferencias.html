@@ -2,107 +2,48 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preferencias del Operador - ALBOR LOGISTICS</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f6f9;
-        }
-        h1, h2 {
-            color: #1e3a8a;
-        }
-        .container {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        form, .info-box {
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            flex: 1;
-            min-width: 300px;
-        }
-        .form-group {
-            margin-bottom: 12px;
-        }
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .acciones {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-        }
-        button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            color: white;
-            font-weight: bold;
-        }
-        .btn-guardar { background-color: #2563eb; }
-        .btn-consultar { background-color: #059669; }
-        .btn-eliminar { background-color: #dc2626; }
-        .btn-restablecer { background-color: #4b5563; }
-        button:hover { opacity: 0.9; }
-        .error { color: red; font-size: 0.9em; margin-top: 10px; }
-        .mensaje-bienvenida {
-            background-color: #e0f2fe;
-            border-left: 4px solid #0284c7;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 4px;
-        }
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f6f9; }
+        h1, h2 { color: #1e3a8a; }
+        .box { background: white; padding: 15px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; }
+        .field { margin-bottom: 10px; }
+        label { display: inline-block; width: 180px; font-weight: bold; }
+        input, select { padding: 5px; width: 180px; }
+        .btn-group { margin-top: 15px; }
+        button { padding: 8px 12px; margin-right: 5px; cursor: pointer; }
+        .error { color: red; margin-top: 5px; }
+        .resumen { background: #e0f2fe; padding: 10px; border-left: 4px solid #0284c7; }
     </style>
 </head>
 <body>
 
-    <h1>ALBOR LOGISTICS - Panel de Preferencias</h1>
+    <h1>ALBOR LOGISTICS - Preferencias del Operador</h1>
 
-    <div class="container">
-        <!-- Formulario para configurar opciones -->
-        <form id="formPreferencias">
-            <h2>Configuración del Operador</h2>
-            
-            <div class="form-group">
+    <div class="box">
+        <form id="formPref">
+            <h2>Configurar Preferencias</h2>
+            <div class="field">
                 <label for="nombre">Nombre del operador:</label>
-                <input type="text" id="nombre" placeholder="Ej: Carlos">
+                <input type="text" id="nombre" placeholder="Carlos">
             </div>
-
-            <div class="form-group">
+            <div class="field">
                 <label for="idioma">Idioma:</label>
                 <select id="idioma">
                     <option value="Español">Español</option>
                     <option value="Inglés">Inglés</option>
                 </select>
             </div>
-
-            <div class="form-group">
-                <label for="numViajes">Número de viajes a visualizar:</label>
+            <div class="field">
+                <label for="numViajes">Viajes a visualizar:</label>
                 <select id="numViajes">
                     <option value="10">10</option>
                     <option value="20">20</option>
                     <option value="50">50</option>
                 </select>
             </div>
-
-            <div class="form-group">
-                <label for="ultimoPanel">Último panel utilizado:</label>
+            <div class="field">
+                <label for="ultimoPanel">Último panel:</label>
                 <select id="ultimoPanel">
                     <option value="Viajes">Viajes</option>
                     <option value="Camiones">Camiones</option>
@@ -111,23 +52,19 @@
                 </select>
             </div>
 
-            <div class="acciones">
-                <button type="button" id="btnGuardar" class="btn-guardar">Guardar preferencias</button>
-                <button type="button" id="btnConsultar" class="btn-consultar">Consultar preferencias</button>
-                <button type="button" id="btnEliminar" class="btn-eliminar">Eliminar preferencias</button>
-                <button type="button" id="btnRestablecer" class="btn-restablecer">Restablecer</button>
+            <div class="btn-group">
+                <button type="button" id="btnGuardar">Guardar preferencias</button>
+                <button type="button" id="btnConsultar">Consultar preferencias</button>
+                <button type="button" id="btnEliminar">Eliminar preferencias</button>
+                <button type="button" id="btnRestablecer">Restablecer</button>
             </div>
-
             <div id="mensajeError" class="error"></div>
         </form>
+    </div>
 
-        <!-- Zona para ver las cookies leídas -->
-        <div class="info-box">
-            <h2>Estado de Preferencias</h2>
-            <div id="pantallaEstado">
-                <!-- Aquí cargaremos el mensaje de bienvenida o de falta de cookies -->
-            </div>
-        </div>
+    <div class="box">
+        <h2>Estado Actual</h2>
+        <div id="pantallaEstado"></div>
     </div>
 
     <script src="js/cookies.js"></script>

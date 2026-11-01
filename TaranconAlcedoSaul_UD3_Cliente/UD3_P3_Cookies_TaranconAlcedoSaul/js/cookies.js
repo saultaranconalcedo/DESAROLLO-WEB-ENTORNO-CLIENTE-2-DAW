@@ -1,84 +1,76 @@
-// Nombre de las cookies que vamos a usar en la app
-const COOKIES_APP = ['albor_nombre', 'albor_idioma', 'albor_numViajes', 'albor_ultimoPanel'];
+// Nombres clave para las cookies
+const CLAVES_COOKIES = ['op_nombre', 'op_idioma', 'op_numViajes', 'op_ultimoPanel'];
 
-// Esperamos a tener el HTML listo
 window.addEventListener('DOMContentLoaded', () => {
 
-    // Al entrar a la página intentamos cargar de primeras las cookies guardadas
-    cargarPreferencias();
+    // Cargar nada más entrar
+    cargarEstado();
 
-    // --- FUNCIONES AUXILIARES PARA MANEJAR COOKIES ---
+    // --- FUNCIONES MANEJO DE COOKIES ---
 
-    // Crear/Modificar cookie indicando días de vida
+    // Crear/modificar cookie con fecha de expiración
     function setCookie(nombre, valor, dias) {
-        const fecha = new Date();
-        fecha.setTime(fecha.getTime() + (dias * 24 * 60 * 60 * 1000));
-        const expires = "expires=" + fecha.toUTCString();
-        // encodeURIComponent por si el usuario pone acentos o caracteres raros
-        document.cookie = `${nombre}=${encodeURIComponent(valor)};${expires};path=/`;
+        const d = new Date();
+        d.setTime(d.getTime() + (dias * 24 * 60 * 60 * 1000));
+        document.cookie = `${nombre}=${encodeURIComponent(valor)};expires=${d.toUTCString()};path=/`;
     }
 
-    // Leer una cookie específica por su nombre
+    // Buscar una cookie por nombre separando la cadena document.cookie
     function getCookie(nombre) {
-        const nombreBuscar = nombre + "=";
+        const nombreIgual = nombre + "=";
         const arrayCookies = document.cookie.split(';');
-        
         for (let i = 0; i < arrayCookies.length; i++) {
             let c = arrayCookies[i].trim();
-            if (c.indexOf(nombreBuscar) === 0) {
-                return decodeURIComponent(c.substring(nombreBuscar.length, c.length));
+            if (c.indexOf(nombreIgual) === 0) {
+                return decodeURIComponent(c.substring(nombreIgual.length, c.length));
             }
         }
-        return null;
+        return '';
     }
 
-    // Borrar cookie pasándole una fecha del pasado
+    // Eliminar cookie poniéndole una fecha ya pasada
     function deleteCookie(nombre) {
-        document.cookie = `${nombre}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        document.cookie = `${nombre}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;`;
     }
 
+    // --- MOSTRAR LAS PREFERENCIAS EN PANTALLA ---
 
-    // --- LÓGICA PRINCIPAL ---
+    function cargarEstado() {
+        const nombre = getCookie('op_nombre');
+        const idioma = getCookie('op_idioma');
+        const numViajes = getCookie('op_numViajes');
+        const ultimoPanel = getCookie('op_ultimoPanel');
 
-    function cargarPreferencias() {
-        const nombre = getCookie('albor_nombre');
-        const idioma = getCookie('albor_idioma');
-        const numViajes = getCookie('albor_numViajes');
-        const ultimoPanel = getCookie('albor_ultimoPanel');
+        const div = document.getElementById('pantallaEstado');
 
-        const divEstado = document.getElementById('pantallaEstado');
-
-        // Si existe al menos el nombre del operador, es que hay preferencias
-        if (nombre) {
-            // Sincronizo también los campos del formulario con lo guardado
+        if (nombre !== '') {
+            // Sincronizo los inputs
             document.getElementById('nombre').value = nombre;
             if (idioma) document.getElementById('idioma').value = idioma;
             if (numViajes) document.getElementById('numViajes').value = numViajes;
             if (ultimoPanel) document.getElementById('ultimoPanel').value = ultimoPanel;
 
-            divEstado.innerHTML = `
-                <div class="mensaje-bienvenida">
-                    <p><strong>Bienvenido de nuevo, ${nombre}.</strong></p>
+            div.innerHTML = `
+                <div class="resumen">
+                    <p>Bienvenido de nuevo, <strong>${nombre}</strong>.</p>
                 </div>
-                <p><strong>Tus preferencias:</strong></p>
+                <p>Tus preferencias:</p>
                 <ul>
-                    <li><strong>Idioma:</strong> ${idioma || 'No definido'}</li>
-                    <li><strong>Viajes por página:</strong> ${numViajes || 'No definido'}</li>
-                    <li><strong>Último panel:</strong> ${ultimoPanel || 'No definido'}</li>
+                    <li>Idioma: ${idioma}</li>
+                    <li>Viajes por página: ${numViajes}</li>
+                    <li>Último panel: ${ultimoPanel}</li>
                 </ul>
             `;
         } else {
-            divEstado.innerHTML = `
+            div.innerHTML = `
                 <p>No existen preferencias guardadas.</p>
                 <p>Configura tus preferencias para comenzar.</p>
             `;
         }
     }
 
+    // --- ACCIONES BOTONES ---
 
-    // --- BOTONES ---
-
-    // Guardar o modificar preferencias (caducidad a 30 días)
     document.getElementById('btnGuardar').addEventListener('click', () => {
         const nombre = document.getElementById('nombre').value.trim();
         const idioma = document.getElementById('idioma').value;
@@ -89,37 +81,33 @@ window.addEventListener('DOMContentLoaded', () => {
         divError.textContent = '';
 
         if (nombre === '') {
-            divError.textContent = 'Por favor, escribe el nombre del operador.';
+            divError.textContent = 'Escribe un nombre de operador.';
             return;
         }
 
-        // Guardo todas las cookies durante 30 días
-        setCookie('albor_nombre', nombre, 30);
-        setCookie('albor_idioma', idioma, 30);
-        setCookie('albor_numViajes', numViajes, 30);
-        setCookie('albor_ultimoPanel', ultimoPanel, 30);
+        // Guardo para 30 días
+        setCookie('op_nombre', nombre, 30);
+        setCookie('op_idioma', idioma, 30);
+        setCookie('op_numViajes', numViajes, 30);
+        setCookie('op_ultimoPanel', ultimoPanel, 30);
 
-        // Vuelvo a refrescar el estado visual
-        cargarPreferencias();
+        cargarEstado();
     });
 
-    // Consultar preferencias en pantalla
     document.getElementById('btnConsultar').addEventListener('click', () => {
-        cargarPreferencias();
+        cargarEstado();
     });
 
-    // Borrar cookies del sistema
     document.getElementById('btnEliminar').addEventListener('click', () => {
-        COOKIES_APP.forEach(cookie => deleteCookie(cookie));
-        cargarPreferencias();
+        CLAVES_COOKIES.forEach(c => deleteCookie(c));
+        cargarEstado();
     });
 
-    // Restablecer: borra cookies y resetea el formulario
     document.getElementById('btnRestablecer').addEventListener('click', () => {
-        COOKIES_APP.forEach(cookie => deleteCookie(cookie));
-        document.getElementById('formPreferencias').reset();
+        CLAVES_COOKIES.forEach(c => deleteCookie(c));
+        document.getElementById('formPref').reset();
         document.getElementById('mensajeError').textContent = '';
-        cargarPreferencias();
+        cargarEstado();
     });
 
 });

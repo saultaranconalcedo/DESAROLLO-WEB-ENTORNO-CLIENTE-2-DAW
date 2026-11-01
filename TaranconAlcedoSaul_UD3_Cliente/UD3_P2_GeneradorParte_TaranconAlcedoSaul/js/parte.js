@@ -1,13 +1,9 @@
-// Variable global para guardar los datos recopilados y usarlos si abrimos la ventana emergente
-let datosParteActual = null;
+// Variable donde guardaré los datos introducidos para usarlos en la ventana nueva
+let datosParte = null;
 
-// Esperamos a que el HTML esté cargado antes de enganchar los botones
 window.addEventListener('DOMContentLoaded', () => {
 
-    // --- GENERAR EL PARTE EN LA PÁGINA ---
-
     document.getElementById('btnGenerar').addEventListener('click', () => {
-        // Cojo lo que el usuario ha escrito en cada campo
         const codigo = document.getElementById('codigo').value.trim();
         const matricula = document.getElementById('matricula').value.trim();
         const conductor = document.getElementById('conductor').value.trim();
@@ -17,24 +13,21 @@ window.addEventListener('DOMContentLoaded', () => {
         const estado = document.getElementById('estado').value;
 
         const divError = document.getElementById('mensajeError');
-        divError.textContent = ''; // Limpio errores viejos
+        divError.textContent = '';
 
-        // Validación básica para asegurarme de que no se dejan ningún campo vacío
         if (!codigo || !matricula || !conductor || !origen || !destino || !distancia || !estado) {
-            divError.textContent = 'Por favor, rellena todos los campos del formulario.';
+            divError.textContent = 'Por favor, rellena todos los campos.';
             return;
         }
 
-        // Guardo los datos limpios en el objeto global
-        datosParteActual = { codigo, matricula, conductor, origen, destino, distancia, estado };
+        // Guardo los datos limpios en el objeto
+        datosParte = { codigo, matricula, conductor, origen, destino, distancia, estado };
 
-        // Construyo el HTML dinámicamente con las variables
-        const htmlParte = `
-            <div class="parte-card">
-                <div class="parte-header">
-                    <h3>ALBOR LOGISTICS</h3>
-                    <h4>PARTE DE VIAJE</h4>
-                </div>
+        // Monto la estructura HTML del parte combinando los datos
+        const parteHtml = `
+            <div class="parte-res">
+                <h3>ALBOR LOGISTICS</h3>
+                <h4>PARTE DE VIAJE</h4>
                 <p><strong>Viaje:</strong> ${codigo}</p>
                 <p><strong>Camión:</strong> ${matricula}</p>
                 <p><strong>Conductor:</strong> ${conductor}</p>
@@ -47,66 +40,58 @@ window.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
-        // Injecto el bloque dinámico en el HTML con innerHTML
-        document.getElementById('contenedorParte').innerHTML = htmlParte;
-
-        // Muestro el botón de abrir ventana emergente una vez que ya existe un parte
-        document.getElementById('btnNuevaVentana').style.display = 'block';
+        // Lo inyecto dinámicamente en el documento
+        document.getElementById('contenedorParte').innerHTML = parteHtml;
+        document.getElementById('btnAbrirVentana').style.display = 'inline-block';
     });
 
 
-    // --- ABRIR EL PARTE EN UNA NUEVA VENTANA ---
+    // --- ABRIR PARTE EN NUEVA VENTANA ---
 
-    document.getElementById('btnNuevaVentana').addEventListener('click', () => {
-        if (!datosParteActual) return;
+    document.getElementById('btnAbrirVentana').addEventListener('click', () => {
+        if (!datosParte) return;
 
-        // Uso Date() para obtener la fecha y hora actual bien formateada
+        // Formateo la fecha actual del sistema
         const fechaActual = new Date().toLocaleString('es-ES');
 
-        // Abro una ventana en blanco y me guardo la referencia
-        const ventanaParte = window.open('', 'ParteViajeWin', 'width=500,height=600');
+        const ventanaNueva = window.open('', 'ParteViaje', 'width=450,height=550');
 
-        // Escribo el HTML completo directamente dentro de la nueva ventana con .document.write()
-        ventanaParte.document.write(`
+        // Escribo directamente el HTML completo de la ventana emergente
+        ventanaNueva.document.write(`
             <!DOCTYPE html>
             <html lang="es">
             <head>
                 <meta charset="UTF-8">
-                <title>Parte de Viaje - ${datosParteActual.codigo}</title>
+                <title>Parte de Viaje - ${datosParte.codigo}</title>
                 <style>
-                    body { font-family: Arial, sans-serif; padding: 20px; background-color: #ffffff; }
-                    .header { text-align: center; border-bottom: 2px solid #1e3a8a; margin-bottom: 20px; }
-                    .header h1 { color: #1e3a8a; margin: 0; }
-                    .header h3 { color: #555; margin-top: 5px; }
-                    .box { border: 1px solid #ccc; padding: 15px; border-radius: 5px; }
-                    .fecha { text-align: right; font-size: 0.85em; color: #666; margin-top: 15px; }
+                    body { font-family: Arial, sans-serif; padding: 20px; }
+                    h2 { color: #1e3a8a; text-align: center; margin-bottom: 0; }
+                    h4 { text-align: center; color: #555; margin-top: 5px; }
+                    .card { border: 1px solid #000; padding: 15px; margin-top: 15px; }
+                    .fecha { font-size: 0.85em; text-align: right; margin-top: 20px; color: #666; }
                 </style>
             </head>
             <body>
-                <div class="header">
-                    <h1>ALBOR LOGISTICS</h1>
-                    <h3>PARTE DE VIAJE OFICIAL</h3>
-                </div>
-                <div class="box">
-                    <p><strong>Código de Viaje:</strong> ${datosParteActual.codigo}</p>
-                    <p><strong>Matrícula Camión:</strong> ${datosParteActual.matricula}</p>
-                    <p><strong>Conductor Asignado:</strong> ${datosParteActual.conductor}</p>
+                <h2>ALBOR LOGISTICS</h2>
+                <h4>PARTE DE VIAJE OFICIAL</h4>
+                <div class="card">
+                    <p><strong>Viaje:</strong> ${datosParte.codigo}</p>
+                    <p><strong>Camión:</strong> ${datosParte.matricula}</p>
+                    <p><strong>Conductor:</strong> ${datosParte.conductor}</p>
                     <hr>
-                    <p><strong>Punto de Origen:</strong> ${datosParteActual.origen}</p>
-                    <p><strong>Punto de Destino:</strong> ${datosParteActual.destino}</p>
-                    <p><strong>Distancia Recorrida:</strong> ${datosParteActual.distancia} km</p>
+                    <p><strong>Origen:</strong> ${datosParte.origen}</p>
+                    <p><strong>Destino:</strong> ${datosParte.destino}</p>
+                    <p><strong>Distancia:</strong> ${datosParte.distancia} km</p>
                     <hr>
-                    <p><strong>Estado Actual:</strong> ${datosParteActual.estado}</p>
+                    <p><strong>Estado:</strong> ${datosParte.estado}</p>
                 </div>
-                <div class="fecha">
-                    <p><strong>Fecha de generación:</strong> ${fechaActual}</p>
-                </div>
+                <div class="fecha">Fecha de generación: ${fechaActual}</div>
             </body>
             </html>
         `);
 
-        // Cierro el flujo de escritura de la nueva ventana para que termine de cargar
-        ventanaParte.document.close();
+        // Cierro el flujo de escritura en la nueva ventana
+        ventanaNueva.document.close();
     });
 
 });
