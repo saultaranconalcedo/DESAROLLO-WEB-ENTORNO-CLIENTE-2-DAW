@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Centro de Operaciones - ALBOR LOGISTICS</title>
+
     <style>
+
         body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f6f9; }
         h1, h2 { color: #1e3a8a; }
         .panel { background: white; padding: 15px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; }
@@ -12,34 +12,44 @@
         input[type="text"] { width: 280px; padding: 6px; }
         .error { color: red; font-weight: bold; margin-top: 8px; }
     </style>
+
 </head>
 <body>
 
     <h1>ALBOR LOGISTICS - Centro de Operaciones</h1>
 
     <div class="panel">
+
         <h2>Panel de Control</h2>
         <button id="btnPanel">Abrir panel de operaciones</button>
         <button id="btnSeguimiento">Abrir seguimiento de viajes</button>
         <button id="btnWeb">Abrir web corporativa</button>
         <button id="btnRecargar">Recargar página</button>
         <button id="btnVolver">Volver a la página anterior</button>
+
     </div>
 
+
     <div class="panel">
+
         <h2>Cargar URL externa en ventana secundaria</h2>
         <input type="text" id="inputUrl" placeholder="https://ejemplo.com">
         <button id="btnCargarUrl">Cargar URL</button>
         <div id="mensajeError" class="error"></div>
+
     </div>
 
     <div class="panel">
+
         <h2>Información del Sistema</h2>
         <p><strong>URL actual:</strong> <span id="infoUrl"></span></p>
         <p><strong>Protocolo:</strong> <span id="infoProtocolo"></span></p>
         <p><strong>Navegador / Plataforma:</strong> <span id="infoNavegador"></span></p>
+
     </div>
 
     <script src="js/app.js"></script>
+
 </body>
+
 </html>

@@ -1,15 +1,13 @@
-// Variable global para guardar la referencia de la segunda ventana
 let ventanaSecundaria = null;
 
 window.addEventListener('DOMContentLoaded', () => {
 
-    // Extraigo la info del sistema directamente de las propiedades del navegador
+    // Extraigo la info del sistema 
     document.getElementById('infoUrl').textContent = window.location.href;
     document.getElementById('infoProtocolo').textContent = window.location.protocol;
     document.getElementById('infoNavegador').textContent = window.navigator.userAgent;
 
     // --- ACCIONES DE NAVEGACIÓN ---
-
     document.getElementById('btnPanel').addEventListener('click', () => {
         window.open('centro-operaciones.html', '_blank');
     });
@@ -27,7 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
         window.location.reload();
     });
 
-    document.getElementById('btnVolver').addEventListener('click', () => {
+    document.getElementById('btnVolver').addEventListener('click', () =>   {
         window.history.back();
     });
 

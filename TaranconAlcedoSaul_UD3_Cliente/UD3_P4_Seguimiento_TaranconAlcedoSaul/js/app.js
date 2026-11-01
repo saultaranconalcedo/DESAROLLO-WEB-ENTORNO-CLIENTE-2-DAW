@@ -6,7 +6,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const iframe = document.getElementById('visor');
 
-    // Cargar documentos en el iframe
+    // Cargar documentos en el iframe al hacer click en los botones
     document.getElementById('btnViajes').addEventListener('click', () => {
         iframe.src = 'viajes.html';
     });

@@ -6,7 +6,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // Cargar nada más entrar
     cargarEstado();
 
-    // --- FUNCIONES MANEJO DE COOKIES ---
+    // --- FUNCIONES COOKIES ---
 
     // Crear/modificar cookie con fecha de expiración
     function setCookie(nombre, valor, dias) {
@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
         document.cookie = `${nombre}=${encodeURIComponent(valor)};expires=${d.toUTCString()};path=/`;
     }
 
-    // Buscar una cookie por nombre separando la cadena document.cookie
+    // Buscar una cookie por nombre
     function getCookie(nombre) {
         const nombreIgual = nombre + "=";
         const arrayCookies = document.cookie.split(';');
@@ -44,7 +44,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const div = document.getElementById('pantallaEstado');
 
         if (nombre !== '') {
-            // Sincronizo los inputs
+            // Sincronizar los inputs con las cookies
             document.getElementById('nombre').value = nombre;
             if (idioma) document.getElementById('idioma').value = idioma;
             if (numViajes) document.getElementById('numViajes').value = numViajes;

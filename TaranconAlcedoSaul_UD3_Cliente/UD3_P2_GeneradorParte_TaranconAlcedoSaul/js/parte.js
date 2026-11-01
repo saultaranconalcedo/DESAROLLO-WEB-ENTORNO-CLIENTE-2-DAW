@@ -1,4 +1,4 @@
-// Variable donde guardaré los datos introducidos para usarlos en la ventana nueva
+// para guardar los datos introducidos para usarlos en la ventana nueva
 let datosParte = null;
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -20,10 +20,10 @@ window.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Guardo los datos limpios en el objeto
+        // Guardo los datos limpios
         datosParte = { codigo, matricula, conductor, origen, destino, distancia, estado };
 
-        // Monto la estructura HTML del parte combinando los datos
+        // Monto la estructura HTML combinando los datos
         const parteHtml = `
             <div class="parte-res">
                 <h3>ALBOR LOGISTICS</h3>
@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
-        // Lo inyecto dinámicamente en el documento
+        // Lo pongo en el documento
         document.getElementById('contenedorParte').innerHTML = parteHtml;
         document.getElementById('btnAbrirVentana').style.display = 'inline-block';
     });
@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btnAbrirVentana').addEventListener('click', () => {
         if (!datosParte) return;
 
-        // Formateo la fecha actual del sistema
+        // cambiar la fecha actual del sistema
         const fechaActual = new Date().toLocaleString('es-ES');
 
         const ventanaNueva = window.open('', 'ParteViaje', 'width=450,height=550');
@@ -63,34 +63,41 @@ window.addEventListener('DOMContentLoaded', () => {
             <head>
                 <meta charset="UTF-8">
                 <title>Parte de Viaje - ${datosParte.codigo}</title>
+
                 <style>
                     body { font-family: Arial, sans-serif; padding: 20px; }
                     h2 { color: #1e3a8a; text-align: center; margin-bottom: 0; }
                     h4 { text-align: center; color: #555; margin-top: 5px; }
                     .card { border: 1px solid #000; padding: 15px; margin-top: 15px; }
                     .fecha { font-size: 0.85em; text-align: right; margin-top: 20px; color: #666; }
+
                 </style>
+                
             </head>
             <body>
                 <h2>ALBOR LOGISTICS</h2>
                 <h4>PARTE DE VIAJE OFICIAL</h4>
                 <div class="card">
+
                     <p><strong>Viaje:</strong> ${datosParte.codigo}</p>
                     <p><strong>Camión:</strong> ${datosParte.matricula}</p>
                     <p><strong>Conductor:</strong> ${datosParte.conductor}</p>
                     <hr>
+
                     <p><strong>Origen:</strong> ${datosParte.origen}</p>
                     <p><strong>Destino:</strong> ${datosParte.destino}</p>
                     <p><strong>Distancia:</strong> ${datosParte.distancia} km</p>
                     <hr>
+
                     <p><strong>Estado:</strong> ${datosParte.estado}</p>
+
                 </div>
                 <div class="fecha">Fecha de generación: ${fechaActual}</div>
+
             </body>
             </html>
         `);
 
-        // Cierro el flujo de escritura en la nueva ventana
         ventanaNueva.document.close();
     });
 

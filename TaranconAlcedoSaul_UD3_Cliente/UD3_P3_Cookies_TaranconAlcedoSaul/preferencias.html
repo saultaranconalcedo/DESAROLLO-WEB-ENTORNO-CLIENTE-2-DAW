@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="es">
 <head>
-    <meta charset="UTF-8">
     <title>Preferencias del Operador - ALBOR LOGISTICS</title>
     <style>
+
         body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f6f9; }
         h1, h2 { color: #1e3a8a; }
         .box { background: white; padding: 15px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; }
@@ -15,6 +14,7 @@
         .error { color: red; margin-top: 5px; }
         .resumen { background: #e0f2fe; padding: 10px; border-left: 4px solid #0284c7; }
     </style>
+
 </head>
 <body>
 
@@ -27,6 +27,7 @@
                 <label for="nombre">Nombre del operador:</label>
                 <input type="text" id="nombre" placeholder="Carlos">
             </div>
+
             <div class="field">
                 <label for="idioma">Idioma:</label>
                 <select id="idioma">
@@ -34,6 +35,7 @@
                     <option value="Inglés">Inglés</option>
                 </select>
             </div>
+
             <div class="field">
                 <label for="numViajes">Viajes a visualizar:</label>
                 <select id="numViajes">
@@ -42,6 +44,7 @@
                     <option value="50">50</option>
                 </select>
             </div>
+
             <div class="field">
                 <label for="ultimoPanel">Último panel:</label>
                 <select id="ultimoPanel">
@@ -58,6 +61,7 @@
                 <button type="button" id="btnEliminar">Eliminar preferencias</button>
                 <button type="button" id="btnRestablecer">Restablecer</button>
             </div>
+            
             <div id="mensajeError" class="error"></div>
         </form>
     </div>
