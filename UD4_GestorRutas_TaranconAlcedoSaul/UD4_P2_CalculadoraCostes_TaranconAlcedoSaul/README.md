@@ -1,8 +1,13 @@
-# Práctica 2: Calculadora de costes
+# UD4 – PRÁCTICA 2: Calculadora de costes de transporte
 
-Calcula el combustible necesario, el coste del viaje y el coste por kilómetro a partir de los datos del formulario. Los campos se pueden modificar y el resultado aparece al pulsar el botón.
+## Descripción
+Aplicación para calcular el gasto estimado de un viaje dividiendo cada operación matemática en funciones independientes con parámetros y `return`.
 
-## Estructura
+## Funciones implementadas
+- `combustibleNecesario(distancia, consumo)`
+- `costeCombustible(litros, precio)`
+- `costeTotal(combustible, peajes, adicionales)`
+- `costePorKilometro(total, distancia)`
 
-- `calculadora-costes.html`: formulario y zona donde se muestra el resultado.
-- `js/costes.js`: funciones de cálculo y gestión del formulario.
+## Autor
+Tarancón Alcedo, Saúl

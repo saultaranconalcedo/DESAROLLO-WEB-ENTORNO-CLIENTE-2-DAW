@@ -1,9 +1,12 @@
-# Práctica 3: Gestión de camiones
+# UD4 – PRÁCTICA 3: Sistema de gestión de camiones
 
-La aplicación crea una flota de cinco camiones y permite ver el listado, buscar por matrícula, filtrar por estado y contar los camiones en mantenimiento. También permite añadir kilómetros a un camión.
+## Descripción
+Gestión básica de la flota de ALBOR LOGISTICS mediante objetos creados con una función constructora (`Camion`), propiedades con `this` y métodos propios.
 
 ## Estructura
+- `gestion-camiones.html`: Interfaz de filtros y tabla de flota.
+- `js/camion.js`: Definición del constructor `Camion` y sus métodos.
+- `js/app.js`: Array de instancias (`new Camion`) y funciones de búsqueda/filtrado.
 
-- `gestion-camiones.html`: controles y zona para mostrar los camiones.
-- `js/camion.js`: función constructora y métodos de `Camion`.
-- `js/app.js`: array de camiones, búsquedas, filtros y eventos.
+## Autor
+Tarancón Alcedo, Saúl

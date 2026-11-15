@@ -1,39 +1,55 @@
 <!DOCTYPE html>
-<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Panel de viajes</title>
+    <title>Panel de Viajes - ALBOR LOGISTICS
+    </title>
+
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .tarjeta { border: 1px solid #999; padding: 10px; margin-bottom: 10px; width: 320px; background: #fafafa; }
+        .resumen { border: 2px solid #333; padding: 10px; margin-bottom: 15px; width: 320px; background: #eef; }
+        .filtros { margin-bottom: 15px; }
+        button { margin: 2px; }
+    </style>
+
 </head>
+
 <body>
+
     <h1>ALBOR LOGISTICS</h1>
     <h2>PANEL DE VIAJES</h2>
-    <hr>
 
-    <h3>Resumen operativo</h3>
-    <div id="resumen"></div>
-    <hr>
+    <!-- Aqui sale el resumen operativo -->
+    <div id="cajaResumen" class="resumen"></div>
 
-    <p>
-        <button id="mostrarTodos">Mostrar todos los viajes</button>
-        <button id="mostrarEnRuta">Viajes en ruta</button>
-        <button id="mostrarEntregados">Viajes entregados</button>
-        <button id="contarPendientes">Contar pendientes</button>
-    </p>
-    <p>
-        Código de viaje: <input type="text" id="codigoBuscar">
-        <button id="buscarCodigo">Buscar</button>
-    </p>
-    <p>
-        DNI o nombre de conductor: <input type="text" id="conductorBuscar">
-        <button id="buscarConductor">Viajes del conductor</button>
-    </p>
-    <p>
-        Matrícula: <input type="text" id="camionBuscar">
-        <button id="buscarCamion">Viajes del camión</button>
-    </p>
-    <p id="mensaje"></p>
-    <div id="viajes"></div>
+    <!-- Botones de filtrado -->
+    <div class="filtros">
+        <button id="btnTodos">Todos</button>
+        <button id="btnEnRuta">En ruta</button>
+        <button id="btnEntregados">Entregados</button>
+        <button id="btnPendientes">Contar pendientes</button>
 
+        <br><br>
+
+        Buscar código viaje: <input type="text" id="buscCodigo" placeholder="VIA-001">
+        <button id="btnBuscCodigo">Buscar</button>
+
+        <br><br>
+
+        Filtrar conductor: <input type="text" id="buscConductor" placeholder="Juan García">
+        <button id="btnBuscCond">Filtrar</button>
+
+        <br><br>
+
+        Filtrar matrícula: <input type="text" id="buscCamion" placeholder="1234ABC">
+        <button id="btnBuscCam">Filtrar</button>
+    </div>
+
+    <p id="aviso" style="color:blue; font-weight:bold;"></p>
+
+    <!-- Listado de tarjetas de viajes -->
+    <div id="panelViajes"></div>
+
+    <!-- Importante cargar primero camion/conductor/ruta (planos sueltos, no dependen de nadie), luego viaje (los junta) y al final app.js(arranca todo) -->
     <script src="js/camion.js"></script>
     <script src="js/conductor.js"></script>
     <script src="js/ruta.js"></script>

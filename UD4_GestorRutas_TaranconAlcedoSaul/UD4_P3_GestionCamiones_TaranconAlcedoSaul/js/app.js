@@ -1,117 +1,107 @@
-var camiones = [
+// Creo los 5 camiones usando 'new' y los meto en un array
+
+var flota = [
     new Camion("1234ABC", "Volvo", "FH", 2021, 235000, "disponible"),
-    new Camion("5678DEF", "Scania", "R", 2020, 180000, "en_ruta"),
-    new Camion("9012GHI", "MAN", "TGX", 2018, 310000, "mantenimiento"),
-    new Camion("3456JKL", "Mercedes", "Actros", 2022, 95000, "disponible"),
-    new Camion("7890MNP", "DAF", "XF", 2019, 260000, "en_ruta")
+    new Camion("5678DEF", "Scania", "R", 2022, 180000, "en_ruta"),
+    new Camion("9012GHI", "MAN", "TGX", 2019, 310000, "mantenimiento"),
+    new Camion("3456JKL", "Mercedes", "Actros", 2023, 95000, "disponible"),
+    new Camion("7890MNO", "Iveco", "S-Way", 2020, 260000, "en_ruta")
 ];
 
+// Pinta una tabla HTML con la lista de camiones que le pase
+
 function mostrarCamiones(lista) {
-    var texto = "<table border='1' cellpadding='5'><tr><th>Matrícula</th><th>Modelo</th>" +
-        "<th>Kilómetros</th><th>Estado</th></tr>";
-    var i;
-
-    if (lista.length === 0) {
-        texto = "No se han encontrado camiones.";
-    } else {
-        for (i = 0; i < lista.length; i++) {
-            texto = texto + "<tr><td>" + lista[i].matricula + "</td><td>" +
-                lista[i].marca + " " + lista[i].modelo + "</td><td>" +
-                lista[i].kilometros.toLocaleString("es-ES") + "</td><td>" +
-                lista[i].estado + "</td></tr>";
-        }
-        texto = texto + "</table>";
+    var div = document.getElementById("contenedorTabla");
+    if (lista.length == 0) {
+        div.innerHTML = "<p>No hay camiones que mostrar.</p>";
+        return;
     }
 
-    document.getElementById("resultado").innerHTML = texto;
+    var html = "<table>";
+    html += "<tr><th>Matrícula</th><th>Modelo</th><th>Kilómetros</th><th>Estado</th><th>Revisión</th></tr>";
+
+    for (var i = 0; i < lista.length; i++) {
+        var c = lista[i];
+
+        // Llamo al metodo del propio objeto para ver si le toca taller
+        var aviso = c.necesitaMantenimiento() ? "Sí" : "No";
+
+        html += "<tr>";
+        html += "<td>" + c.matricula + "</td>";
+        html += "<td>" + c.marca + " " + c.modelo + "</td>";
+        html += "<td>" + c.kilometros + "</td>";
+        html += "<td>" + c.estado + "</td>";
+        html += "<td>" + aviso + "</td>";
+        html += "</tr>";
+    }
+
+    html += "</table>";
+    div.innerHTML = html;
 }
 
-function buscarCamion(matricula) {
-    var i;
-    for (i = 0; i < camiones.length; i++) {
-        if (camiones[i].matricula.toUpperCase() === matricula.toUpperCase()) {
-            return camiones[i];
+// Busca un camion exacto por su matricula
+function buscarPorMatricula(mat) {
+    var matMayus = mat.toUpperCase().trim();
+    for (var i = 0; i < flota.length; i++) {
+        if (flota[i].matricula == matMayus) {
+            return [flota[i]]; // Lo devuelvo dentro de un array para que mostrarCamiones lo pinte igual
         }
     }
-    return null;
+    return [];
 }
+// Filtra los camiones segun el estado que le pida
 
-function mostrarDisponibles() {
-    var disponibles = [];
-    var i;
-    for (i = 0; i < camiones.length; i++) {
-        if (camiones[i].estado === "disponible") {
-            disponibles.push(camiones[i]);
+function filtrarPorEstado(estadoBuscado) {
+    var resultado = [];
+
+    for (var i = 0; i < flota.length; i++) {
+        if (flota[i].estado == estadoBuscado) {
+        resultado.push(flota[i]);
         }
     }
-    mostrarCamiones(disponibles);
+    return resultado;
 }
 
-function mostrarEnRuta() {
-    var enRuta = [];
-    var i;
-    for (i = 0; i < camiones.length; i++) {
-        if (camiones[i].estado === "en_ruta") {
-            enRuta.push(camiones[i]);
-        }
-    }
-    mostrarCamiones(enRuta);
-}
-
+// Cuenta cuantos estan en el taller
 function contarMantenimiento() {
-    var cantidad = 0;
-    var i;
-    for (i = 0; i < camiones.length; i++) {
-        if (camiones[i].estado === "mantenimiento") {
-            cantidad++;
+    var contador = 0;
+
+    for (var i = 0; i < flota.length; i++) {
+        if (flota[i].estado == "mantenimiento") {
+        contador++;
         }
     }
-    document.getElementById("resultado").innerHTML =
-        "<p>Camiones en mantenimiento: " + cantidad + "</p>";
+    return contador;
 }
-
-document.getElementById("todos").onclick = function() {
-    mostrarCamiones(camiones);
-};
-
-document.getElementById("disponibles").onclick = function() {
-    mostrarDisponibles();
-};
-
-document.getElementById("enRuta").onclick = function() {
-    mostrarEnRuta();
-};
-
-document.getElementById("mantenimiento").onclick = function() {
-    contarMantenimiento();
-};
-
-document.getElementById("buscar").onclick = function() {
-    var matricula = document.getElementById("matriculaBuscar").value.trim();
-    var camion = buscarCamion(matricula);
-    if (camion === null) {
-        document.getElementById("resultado").innerHTML = "No se ha encontrado esa matrícula.";
-    } else {
-        mostrarCamiones([camion]);
-    }
-};
-
-document.getElementById("anadirKilometros").onclick = function() {
-    var matricula = document.getElementById("matriculaKilometros").value.trim();
-    var kilometros = parseFloat(document.getElementById("kilometrosNuevos").value);
-    var camion = buscarCamion(matricula);
-    var mensaje = document.getElementById("mensaje");
-
-    if (camion === null) {
-        mensaje.innerHTML = "No se ha encontrado esa matrícula.";
-    } else if (isNaN(kilometros) || !camion.aniadirKilometros(kilometros)) {
-        mensaje.innerHTML = "Indica una cantidad de kilómetros mayor que cero.";
-    } else {
-        mensaje.innerHTML = "Kilómetros añadidos.";
-        mostrarCamiones([camion]);
-    }
-};
 
 window.onload = function() {
-    mostrarCamiones(camiones);
+    
+    // Al abrir la web muestro toda la flota
+    mostrarCamiones(flota);
+
+    document.getElementById("btnTodos").onclick = function() {
+        document.getElementById("infoExtra").innerHTML = "";
+        mostrarCamiones(flota);
+    };
+
+    document.getElementById("btnDisponibles").onclick = function() {
+        document.getElementById("infoExtra").innerHTML = "";
+        mostrarCamiones(filtrarPorEstado("disponible"));
+    };
+
+    document.getElementById("btnRuta").onclick = function() {
+        document.getElementById("infoExtra").innerHTML = "";
+        mostrarCamiones(filtrarPorEstado("en_ruta"));
+    };
+
+    document.getElementById("btnContarMant").onclick = function() {
+        var total = contarMantenimiento();
+        document.getElementById("infoExtra").innerHTML = "Camiones actualmente en mantenimiento: " + total;
+    };
+
+    document.getElementById("btnBuscar").onclick = function() {
+        var texto = document.getElementById("inputMatricula").value;
+        document.getElementById("infoExtra").innerHTML = "";
+        mostrarCamiones(buscarPorMatricula(texto));
+    };
 };

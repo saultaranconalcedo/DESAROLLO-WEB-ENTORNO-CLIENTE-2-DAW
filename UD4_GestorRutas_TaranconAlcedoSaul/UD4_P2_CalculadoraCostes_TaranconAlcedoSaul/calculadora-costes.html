@@ -1,23 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <title>Calculadora de costes</title>
+    <title>Calculadora de Costes - ALBOR LOGISTICS</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .campo { margin-bottom: 10px; }
+        label { display: inline-block; width: 220px; }
+        .resultado { border: 1px solid #999; padding: 15px; margin-top: 15px; background: #f9f9f9; width: 350px; }
+    </style>
 </head>
+
 <body>
+
     <h1>ALBOR LOGISTICS</h1>
     <h2>CALCULADORA DE COSTES</h2>
-    <hr>
 
-    <p>Distancia (km): <input type="number" id="distancia" value="640" min="1"></p>
-    <p>Consumo (litros/100 km): <input type="number" id="consumo" value="30" min="0"></p>
-    <p>Precio combustible (€/l): <input type="number" id="precio" value="1.45" min="0" step="0.01"></p>
-    <p>Coste peajes (€): <input type="number" id="peajes" value="75" min="0" step="0.01"></p>
-    <p>Coste adicional (€): <input type="number" id="adicionales" value="40" min="0" step="0.01"></p>
-    <button id="calcular">Calcular costes</button>
-    <p id="error" style="color: red;"></p>
-    <div id="resultado"></div>
+    <div class="campo">
+        <label>Distancia del viaje (km):</label>
+        <input type="number" id="distancia" value="640">
+    </div>
+
+    <div class="campo">
+        <label>Consumo (litros/100 km):</label>
+        <input type="number" id="consumo" value="30">
+    </div>
+
+    <div class="campo">
+        <label>Precio combustible (€/l):</label>
+        <input type="number" step="0.01" id="precio" value="1.45">
+    </div>
+
+    <div class="campo">
+        <label>Coste de peajes (€):</label>
+        <input type="number" step="0.01" id="peajes" value="75">
+    </div>
+
+    <div class="campo">
+        <label>Coste adicional (€):</label>
+        <input type="number" step="0.01" id="adicional" value="40">
+    </div>
+
+    <button id="btnCalcular">Calcular costes</button>
+
+    <div id="cajaResultado" class="resultado" style="display:none;"></div>
 
     <script src="js/costes.js"></script>
+    
 </body>
 </html>

@@ -1,20 +1,13 @@
-# Práctica 4: Modelo de datos de ALBOR LOGISTICS
+# UD4 – PRÁCTICA 4: Modelo de datos de ALBOR LOGISTICS
 
-El panel muestra viajes relacionados con sus camiones, conductores y rutas. Se pueden ver todos los viajes, buscarlos por código, filtrar por conductor o matrícula, ver los que están en ruta o entregados y contar los pendientes. El resumen operativo aparece al abrir la página.
+## Descripción
+Integración de entidades de negocio mediante objetos definidos por el usuario (`Camion`, `Conductor`, `Ruta` y `Viaje`) relacionados entre sí dentro de arrays para gestionar la operativa de transporte.
 
-## Estructura
-
-- `index.html`: panel, resumen y controles.
-- `js/camion.js`, `js/conductor.js` y `js/ruta.js`: funciones constructoras de cada entidad.
-- `js/viaje.js`: constructor de viaje y método para mostrar su información.
-- `js/app.js`: datos de ejemplo, funciones de búsqueda y filtros, resumen y eventos.
-
-## Relaciones
-
+## Esquema de relaciones
 ```text
-Camión ─────┐
-Conductor ──┼──> Viaje
-Ruta ───────┘
-```
-
-Cada objeto `Viaje` contiene un objeto `Camion`, un objeto `Conductor` y un objeto `Ruta`.
+Camión      (matricula, marca, modelo, kilometros, estado)
+Conductor   (dni, nombre, telefono, experiencia, disponible)
+Ruta        (codigo, origen, destino, distancia)
+   │
+   ▼
+Viaje       (codigo, camion, conductor, ruta, estado)

@@ -1,23 +1,26 @@
+// Constructor principal: recibe objetos completos de Camion, Conductor y Ruta
+
 function Viaje(codigo, camion, conductor, ruta, estado) {
     this.codigo = codigo;
-    this.camion = camion;
-    this.conductor = conductor;
-    this.ruta = ruta;
+    this.camion = camion; // Aqui va el objeto Camion entero
+    this.conductor = conductor; // Aqui va el objeto Conductor entero
+    this.ruta = ruta; // Aqui va el objeto Ruta entero
     this.estado = estado;
 
-    // Guardo los objetos relacionados para poder mostrar los datos completos del viaje.
-    this.mostrarInfo = function() {
-        return "<h3>" + this.codigo + "</h3>" +
-            "<p>Camión: " + this.camion.matricula + " | " + this.camion.marca + " " +
-            this.camion.modelo + " | " + this.camion.kilometros + " km | Estado: " +
-            this.camion.estado + "</p>" +
-            "<p>Conductor: " + this.conductor.nombre + " | DNI: " + this.conductor.dni +
-            " | Teléfono: " + this.conductor.telefono + " | Experiencia: " +
-            this.conductor.experiencia + " años | Disponible: " +
-            this.conductor.disponible + "</p>" +
-            "<p>Ruta: " + this.ruta.codigo + " | " + this.ruta.origen + " a " +
-            this.ruta.destino + " | Distancia: " + this.ruta.distancia + " km</p>" +
-            "<p>Estado del viaje: " + this.estado + "</p>" +
-            "<hr>";
+    // Metodo para sacar la ficha entrando a las propiedades de los objetos de dentro
+
+    this.mostrarDetalle = function() {
+        
+        var texto = "<div class='tarjeta'>";
+        texto += "<b>" + this.codigo + "</b><br>";
+        texto += "────────────────────────<br>";
+        texto += "Camión: " + this.camion.matricula + " (" + this.camion.marca + ")<br>";
+        texto += "Conductor: " + this.conductor.nombre + "<br>";
+        texto += "Ruta: " + this.ruta.origen + " → " + this.ruta.destino + "<br>";
+        texto += "Distancia: " + this.ruta.distancia + " km<br>";
+        texto += "Estado: <b>" + this.estado + "</b><br>";
+        texto += "────────────────────────";
+        texto += "</div>";
+        return texto;
     };
 }
