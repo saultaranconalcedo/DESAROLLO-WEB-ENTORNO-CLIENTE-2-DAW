@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de viajes</title>
+</head>
+<body>
+    <h1>ALBOR LOGISTICS</h1>
+    <h2>PANEL DE VIAJES</h2>
+    <hr>
+
+    <h3>Resumen operativo</h3>
+    <div id="resumen"></div>
+    <hr>
+
+    <p>
+        <button id="mostrarTodos">Mostrar todos los viajes</button>
+        <button id="mostrarEnRuta">Viajes en ruta</button>
+        <button id="mostrarEntregados">Viajes entregados</button>
+        <button id="contarPendientes">Contar pendientes</button>
+    </p>
+    <p>
+        Código de viaje: <input type="text" id="codigoBuscar">
+        <button id="buscarCodigo">Buscar</button>
+    </p>
+    <p>
+        DNI o nombre de conductor: <input type="text" id="conductorBuscar">
+        <button id="buscarConductor">Viajes del conductor</button>
+    </p>
+    <p>
+        Matrícula: <input type="text" id="camionBuscar">
+        <button id="buscarCamion">Viajes del camión</button>
+    </p>
+    <p id="mensaje"></p>
+    <div id="viajes"></div>
+
+    <script src="js/camion.js"></script>
+    <script src="js/conductor.js"></script>
+    <script src="js/ruta.js"></script>
+    <script src="js/viaje.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
